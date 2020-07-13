@@ -49,3 +49,21 @@ def eval_model_perf(input):
 
 def apply(input):
     return eval_model_perf(input)
+
+
+input_dict = {
+    "github_params": {
+        "github_token": "github_token",
+        "github_repo": "aslisabanci/algorithmia_issue_reporter",
+        "commit_sha": "a0ce353072c4b63c68d25bf43a1efb73e2f1bd66",
+    },
+    "eval_params": {
+        "metric": "accuracy",
+        "threshold": 0.85,
+        "checkpoints": "data://asli/checkpoints/fashion_mnist_checkpoint",
+    },
+}
+
+str = json.dumps(input_dict)
+print(str)
+
