@@ -1,0 +1,27 @@
+name: Algorithmia-Github Issue Hook
+
+on:
+  schedule:
+    - cron: "*/2 * * * *"
+
+jobs:
+  algorithmia-ci:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2.0.0
+        with:
+          ref: ${{github.sha}}
+          path: algorithm
+      - name: Algorithmia-Github Issue Hook
+        uses: aslisabanci/algorithmia-perf-issue-hook@0.0.1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: ${{ secrets.GITHUB_REPOSITORY }}
+        with:
+          api_key: ${{ secrets.api_key }}
+          path: algorithm
+          metric: accuracy
+          threshold: 0.85
+          checkpoints: data://asli/checkpoints/fashion_mnist_checkpoint
