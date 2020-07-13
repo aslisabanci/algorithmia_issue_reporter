@@ -24,4 +24,4 @@ jobs:
           path: algorithm
           metric: accuracy
           threshold: 0.85
-          checkpoints: data://asli/checkpoints/fashion_mnist_checkpoint
+          checkpoints: ./model_checkpoints/fashion_mnist_checkpoint
