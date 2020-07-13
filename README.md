@@ -1,4 +1,4 @@
-# A responsible model on Algorithmia, reporting back its performance issues
+# A responsible algorithm on Algorithmia, reporting back its own performance as Github issues
 
 This algo is only a showcase for my POC integration between Github Actions and Algorithmia. 
 
