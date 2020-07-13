@@ -38,7 +38,7 @@ def eval_model_perf(input):
     _, (X_test, y_test) = keras.datasets.fashion_mnist.load_data()
     _, test_metric = model.evaluate(X_test, y_test)
 
-    if test_metric < threshold:
+    if test_metric < float(threshold):
         github_params = input_dict["github_params"]
         issue_title = f"Test {metric} below {threshold}"
         create_github_issue(github_params, issue_title)
