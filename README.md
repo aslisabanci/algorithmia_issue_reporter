@@ -1,26 +1,18 @@
-# A responsible model on Algorithmia, reporting back its issues
+# A responsible model on Algorithmia, reporting back its performance issues
 
 This algo is only a showcase for my POC integration between Github Actions and Algorithmia. 
 
-The algorithm itself trains a vanilla TF model on FashionMNIST and checks its performance against the provided metrics and thresholds, passed to it through my POC Github action at [Algorithmia-Github Issue Hook action] (https://github.com/marketplace/actions/algorithmia-github-issue-hook)
+The algorithm uses the POC Github action at [Algorithmia-Github Issue Hook action] (https://github.com/marketplace/actions/algorithmia-github-issue-hook) as a workflow and with the configuration params it receives through this Github action, it performs very simple steps. 
 
-So the basic gist is: 
-```
-def eval_model_perf(input):
-    input_dict = json.loads(input)
-    eval_params = input_dict["eval_params"]
-    metric = eval_params["metric"]
-    final_train_metric, final_val_metric, test_metric = train_eval_model(metric)
+The main parameters passed to the algorithm are: 
+- metric
+- threshold
+- model checkpoints path
+- Github token, Github repo name, latest commit SHA
 
-    threshold = eval_params["threshold"]
-    if test_metric < threshold:
-        github_params = input_dict["github_params"]
-        issue_title = f"Test {metric} below {threshold}"
-        issue_body = f"Train {metric}: {final_train_metric}, Validation {metric}: {final_val_metric}"
-        create_github_issue(github_params, issue_title, issue_body)
-        return "Houston we have a Github issue!"
-    else:
-        return "Good job model, keep going!"
-```
-
-and you'll get an issue on your repo that looks like this [Test accuracy below 0.85 ](https://github.com/aslisabanci/algorithmia_perf_track/issues/10) when your model has something to report back.
+Using these, the algorithm does the following steps:
+- Compiles the model for the given metric
+- Loads a Tensorflow model using the checkpoints from the given path (an Algorithmia "Hosted Path" location in our example)
+- Evaluates the loaded model on the test set
+- Compares the test performance (for the given metric) with the given threshold
+- If the performance is below the threshold, it creates a Github issue using the Github params, that looks like this: TBD
