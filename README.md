@@ -2,7 +2,7 @@
 
 This algo is only a showcase for my POC integration between Github Actions and Algorithmia. 
 
-The algorithm uses my Github action at [Algorithmia-Github Issue Hook action] (https://github.com/marketplace/actions/algorithmia-github-issue-hook) as a workflow and with the configuration params it receives through this Github action, it performs very simple steps. 
+The algorithm uses my Github action at [Algorithmia-Github Issue Hook action](https://github.com/marketplace/actions/algorithmia-github-issue-hook) as a workflow and with the configuration params it receives through this Github action, it performs very simple steps. 
 
 The main parameters passed to the algorithm are: 
 - metric
