@@ -15,7 +15,7 @@ jobs:
           ref: ${{github.sha}}
           path: algorithm
       - name: Algorithmia-Github Issue Hook
-        uses: aslisabanci/algorithmia-perf-issue-hook@0.0.1
+        uses: aslisabanci/algorithmia_github_issue_hook@v0.1-alpha
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_REPOSITORY: ${{ secrets.GITHUB_REPOSITORY }}
