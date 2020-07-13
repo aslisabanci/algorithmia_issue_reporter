@@ -2,7 +2,7 @@ name: Algorithmia-Github Issue Hook
 
 on:
   schedule:
-    - cron: "*/2 * * * *"
+    - cron: "0 */12 * * *"
 
 jobs:
   algorithmia-ci:
