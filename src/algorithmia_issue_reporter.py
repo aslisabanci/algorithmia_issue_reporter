@@ -13,13 +13,14 @@ def create_github_issue(github_params: dict, issue_title: str):
     repo = github.get_repo(github_params["github_repo"])
     commit_hash = github_params["commit_sha"]
     hash_info = f"\n\n This issue was automatically created by the GitHub Action workflow. \n The commit sha was: _{commit_hash}_."
-    issue = repo.create_issue(title=issue_title, body=hash_info + hash_info)
+    issue = repo.create_issue(title=issue_title, body=hash_info)
 
 
 def eval_model_perf(input):
     input_dict = json.loads(input)
     eval_params = input_dict["eval_params"]
     metric = eval_params["metric"]
+    threshold = eval_params["threshold"]
     checkpoint_path = eval_params["checkpoints"]
 
     model = keras.models.Sequential(
@@ -33,12 +34,10 @@ def eval_model_perf(input):
     model.compile(
         loss="sparse_categorical_crossentropy", optimizer="sgd", metrics=[metric]
     )
-    # model.load_weights("data://asli/checkpoints/fashion_mnist_checkpoint")
     model.load_weights(checkpoint_path)
     _, (X_test, y_test) = keras.datasets.fashion_mnist.load_data()
     _, test_metric = model.evaluate(X_test, y_test)
 
-    threshold = eval_params["threshold"]
     if test_metric < threshold:
         github_params = input_dict["github_params"]
         issue_title = f"Test {metric} below {threshold}"
