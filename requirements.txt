@@ -1,4 +1,4 @@
 algorithmia>=1.0.0,<2.0
 PyGithub
-tensorflow==2.1.0
+tensorflow==2.9.3
 tensorflow-datasets==2.1.0
